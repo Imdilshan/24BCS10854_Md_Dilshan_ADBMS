@@ -17,8 +17,6 @@ GROUP BY EMP_CITY
 HAVING MAX(EMP_SALARY)>=90000
 ```
 
-
-
 ## Exp 3.3
 
 ```
@@ -27,5 +25,16 @@ WHERE ID NOT IN(
 SELECT CUSTOMERID FROM ORDERS
 )
 ```
+
+## Exp 3.4
+```
+    SELECT e.name, b.bonus
+    FROM Employee as e 
+    left join
+    Bonus as b
+    on e.empid = b.empid
+    where  b.bonus < 1000 or b.bonus is null;
+```
+
 
 
