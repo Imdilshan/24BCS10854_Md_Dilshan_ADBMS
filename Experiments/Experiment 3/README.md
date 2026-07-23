@@ -1,3 +1,15 @@
+
+## Exp 3.2
+
+```
+SELECT emp_city,MAX(EMP_SALARY) AS MAX_SALARY
+FROM employees
+GROUP BY EMP_CITY
+HAVING MAX(EMP_SALARY)>=90000
+```
+
+
+
 ## Exp 3.3
 
 ```
@@ -6,4 +18,5 @@ WHERE ID NOT IN(
 SELECT CUSTOMERID FROM ORDERS
 )
 ```
+
 
