@@ -1,4 +1,4 @@
-## Unionit st
+## Union
 
   ```
   select *
