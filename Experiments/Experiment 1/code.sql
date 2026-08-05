@@ -40,5 +40,3 @@ LIMIT 1;
 
 Select * from Appointments
 LIMIT  1;
-
-----
