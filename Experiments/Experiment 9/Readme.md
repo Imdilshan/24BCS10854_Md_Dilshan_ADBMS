@@ -7,25 +7,26 @@
   the trigger must raise a custom User-Defined Exception  with a specific message
 */
 
-CREATE OR REPLACE TRIGGER trg_salary_hike_limit
-BEFORE UPDATE OF salary
-ON Salary_Hike
-FOR EACH ROW
-DECLARE
-    e_salary_limit EXCEPTION;
-BEGIN
-    IF :NEW.salary > :OLD.salary * 1.15 THEN
-        RAISE e_salary_limit;
-    END IF;
+create or replace function salary_hike_func()
+returns Trigger
+AS
+$$
+	Begin
+		if New.emp_salary - Old.emp_salary > Old.emp_salary * 0.15 then
+			Raise Exception 'The salary hike cannot be more than 15 percent of the old salary';
+		end if;
 
-EXCEPTION
-    WHEN e_salary_limit THEN
-        RAISE_APPLICATION_ERROR(
-            -20001,
-            'Salary increase cannot exceed 15% of the old salary.'
-        );
-END;
-/
+		return New;
+	End;
+$$ language plpgsql
+
+create trigger salary_hike_trig
+Before update
+on employees
+For each row
+Execute function salary_hike_func()
+
+update employees set emp_salary = 100000 where emp_id = 103
 
 ```
 
